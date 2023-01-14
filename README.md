@@ -1,2 +1,2 @@
 # java-handle-leak-demo
-句柄泄露样例
+java句柄泄露样例
