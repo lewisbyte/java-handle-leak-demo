@@ -28,6 +28,7 @@ public class ConnectionResourceLeakExample {
      */
     public void openFileResource(String filePath) throws FileNotFoundException {
         BufferedReader ignored = new BufferedReader(new FileReader(filePath));
+        // do-nothing
     }
 
     /**
@@ -37,8 +38,7 @@ public class ConnectionResourceLeakExample {
      */
     public void openFileAndCloseResource(String filePath) throws IOException {
         try (BufferedReader ignored = new BufferedReader(new FileReader(filePath))) {
-        } catch (Exception e) {
-            throw e;
+            // do-nothing
         }
     }
 
@@ -47,22 +47,12 @@ public class ConnectionResourceLeakExample {
      */
     @SneakyThrows
     public int printAndGetCurrentProcessHandleNumber() {
-        int pid = getCurrentProcessId();
-        StringBuilder message = new StringBuilder();
-        message.append("获取当前进程 pid: ").append(pid).append("  句柄数量：");
-
-        Process processResult = new ProcessBuilder("bash", "-c", String.format("lsof | grep %d | wc -l", pid))
-                .start();
-
+        int currentProcessId = getCurrentProcessId();
+        Process processResult = new ProcessBuilder("bash", "-c", String.format("lsof | grep %d | wc -l", currentProcessId)).start();
         BufferedReader reader = new BufferedReader(new InputStreamReader(processResult.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            message.append(' ');
-            message.append(line);
-        }
-
-        log.info(message.toString());
-        return 0;
+        int handle = Integer.parseInt(reader.readLine().trim());
+        log.info("当前进程 pid: [" + currentProcessId + "] 句柄数量：[" + handle + "]");
+        return handle;
     }
 
     /**
