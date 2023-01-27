@@ -41,25 +41,25 @@ public class ConnectionResourceLeakExampleTest {
     }
 
     @Test
-    public void openFileCloseResource() throws IOException {
-        log.info("------------测试打开文件关闭文件资源------------");
+    public void openFileAndCloseResource() throws IOException {
+        log.info("------------openFileAndCloseResource-测试打开文件关闭文件资源------------");
         connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
         for (int i = 0; i < 1000; i++) {
-            connectionResourceLeakExample.openFileCloseResource(tmpFile.getAbsolutePath());
+            connectionResourceLeakExample.openFileAndCloseResource(tmpFile.getAbsolutePath());
         }
         connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
-        log.info("------------测试打开文件关闭文件资源------------");
+        log.info("------------openFileAndCloseResource-测试打开文件关闭文件资源------------");
     }
 
     @Test
-    public void openFileResource() throws FileNotFoundException {
-        log.info("------------测试打开文件不关闭文件资源------------");
+    public void openFile() throws FileNotFoundException {
+        log.info("------------openFile-测试打开文件不关闭文件资源------------");
         connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
         for (int i = 0; i < 1000; i++) {
             connectionResourceLeakExample.openFileResource(tmpFile.getAbsolutePath());
         }
         connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
-        log.info("------------测试打开文件不关闭文件资源------------");
+        log.info("------------openFile-测试打开文件不关闭文件资源------------");
     }
 
 

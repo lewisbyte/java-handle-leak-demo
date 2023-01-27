@@ -35,7 +35,7 @@ public class ConnectionResourceLeakExample {
      *
      * @param filePath 文件路径
      */
-    public void openFileCloseResource(String filePath) throws IOException {
+    public void openFileAndCloseResource(String filePath) throws IOException {
         try (BufferedReader ignored = new BufferedReader(new FileReader(filePath))) {
         } catch (Exception e) {
             throw e;
