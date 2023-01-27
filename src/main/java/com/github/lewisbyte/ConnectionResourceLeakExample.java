@@ -49,7 +49,7 @@ public class ConnectionResourceLeakExample {
     public int printAndGetCurrentProcessHandleNumber() {
         int pid = getCurrentProcessId();
         StringBuilder message = new StringBuilder();
-        message.append("获取当前进程 pid: ").append(pid).append("句柄数量：");
+        message.append("获取当前进程 pid: ").append(pid).append("  句柄数量：");
 
         Process processResult = new ProcessBuilder("bash", "-c", String.format("lsof | grep %d | wc -l", pid))
                 .start();
