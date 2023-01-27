@@ -37,8 +37,11 @@ public class ConnectionResourceLeakExample {
      */
     @SneakyThrows
     public void openFileAndCloseResource(String filePath) {
-        try (BufferedReader ignored = new BufferedReader(new FileReader(filePath))) {
+        BufferedReader ignored = new BufferedReader(new FileReader(filePath));
+        try {
             // do-nothing
+        } finally {
+            ignored.close();
         }
     }
 
