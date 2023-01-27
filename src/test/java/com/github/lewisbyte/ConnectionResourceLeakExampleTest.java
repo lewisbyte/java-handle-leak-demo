@@ -1,6 +1,7 @@
 package com.github.lewisbyte;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import cn.hutool.core.io.FileUtil;
@@ -15,14 +16,14 @@ public class ConnectionResourceLeakExampleTest {
     /* 临时文件 */
     private File tmpFile;
 
+    private final ConnectionResourceLeakExample connectionResourceLeakExample = new ConnectionResourceLeakExample();
+
     /**
      * 单元测试开始之前创建一个临时文件用于测试
      */
     @Before
     public void setUp() {
-        log.info("创建临时文件");
         this.tmpFile = FileUtil.createTempFile();
-        log.info("创建的临时文件路径是: {}", tmpFile.getAbsolutePath());
     }
 
     /**
@@ -30,17 +31,36 @@ public class ConnectionResourceLeakExampleTest {
      */
     @After
     public void tearDown() {
-        log.info("删除临时文件");
         FileUtil.del(this.tmpFile);
-        log.info("删除的临时文件路径是: {}", tmpFile.getAbsolutePath());
+    }
+
+
+    @Test
+    public void getCurrentProcessHandleCount() {
+        connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
     }
 
     @Test
-    public void testHandleCount() throws IOException {
-        log.info("测试句柄计数");
-
-        new ProcessBuilder("sh", "-c", "lsof | wc -l") // Linux / Unix terminal
-                .start();
-
+    public void openFileCloseResource() throws IOException {
+        log.info("------------测试打开文件关闭文件资源------------");
+        connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
+        for (int i = 0; i < 1000; i++) {
+            connectionResourceLeakExample.openFileCloseResource(tmpFile.getAbsolutePath());
+        }
+        connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
+        log.info("------------测试打开文件关闭文件资源------------");
     }
+
+    @Test
+    public void openFileResource() throws FileNotFoundException {
+        log.info("------------测试打开文件不关闭文件资源------------");
+        connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
+        for (int i = 0; i < 1000; i++) {
+            connectionResourceLeakExample.openFileResource(tmpFile.getAbsolutePath());
+        }
+        connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
+        log.info("------------测试打开文件不关闭文件资源------------");
+    }
+
+
 }
