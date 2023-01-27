@@ -1,8 +1,6 @@
 package com.github.lewisbyte;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import cn.hutool.core.io.FileUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +27,7 @@ public class ConnectionResourceLeakExampleTest {
     @Before
     public void setUp() {
         this.tmpFile = FileUtil.createTempFile();
+        log.info("创建临时文件: {}", tmpFile.getAbsolutePath());
     }
 
     /**
@@ -37,6 +36,7 @@ public class ConnectionResourceLeakExampleTest {
     @After
     public void tearDown() {
         FileUtil.del(this.tmpFile);
+        log.info("删除临时文件: {}", tmpFile.getAbsolutePath());
     }
 
 
@@ -48,7 +48,7 @@ public class ConnectionResourceLeakExampleTest {
 
     @Test
     @Order(1)
-    public void test001WithOpenFileAndCloseResource() throws IOException {
+    public void test001WithOpenFileAndCloseResource() {
         log.info("------------开始test001WithOpenFileAndCloseResource-测试打开文件，关闭文件资源------------");
         int start = connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
         int loopNum = 1000;
@@ -63,7 +63,7 @@ public class ConnectionResourceLeakExampleTest {
 
     @Test
     @Order(2)
-    public void test002WithOpenFile() throws FileNotFoundException {
+    public void test002WithOpenFile() {
         log.info("------------开始test002WithOpenFile-测试打开文件，不关闭文件资源------------");
         int start = connectionResourceLeakExample.printAndGetCurrentProcessHandleNumber();
         int loopNum = 1000;

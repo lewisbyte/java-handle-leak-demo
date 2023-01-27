@@ -12,16 +12,20 @@
 - 单元测试日志
 
 ```log
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------openFile-测试打开文件，不关闭文件资源------------
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: 19956 句柄数量：53
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: 19956 句柄数量：1053
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 打开文件不关闭文件资源，进程句柄增加 1000
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------openFile-测试打开文件，不关闭文件资源------------
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------openFileAndCloseResource-测试打开文件，关闭文件资源------------
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: 19956 句柄数量：1055
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: 19956 句柄数量：1055
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 打开文件关闭文件资源，进程句柄增加 0
-[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------openFileAndCloseResource-测试打开文件，关闭文件资源------------
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 创建临时文件: /private/var/folders/l9/dwlgkqdj119dkrsm7yqfqvlc0000gn/T/hutool5657758728333737466.tmp
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------开始test001WithOpenFileAndCloseResource-测试打开文件，关闭文件资源------------
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: [22236] 句柄数量：[65]
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: [22236] 句柄数量：[65]
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 打开[1000]个文件资源，进程句柄增加: [0]
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------结束test001WithOpenFileAndCloseResource-测试打开文件，关闭文件资源------------
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 删除临时文件: /private/var/folders/l9/dwlgkqdj119dkrsm7yqfqvlc0000gn/T/hutool5657758728333737466.tmp
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 创建临时文件: /private/var/folders/l9/dwlgkqdj119dkrsm7yqfqvlc0000gn/T/hutool2971625087013833248.tmp
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------开始test002WithOpenFile-测试打开文件，不关闭文件资源------------
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: [22236] 句柄数量：[67]
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExample - 当前进程 pid: [22236] 句柄数量：[1067]
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 打开[1000]个文件资源，进程句柄增加: [1000]
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - ------------结束test002WithOpenFile-测试打开文件，不关闭文件资源------------
+[main] INFO com.github.lewisbyte.ConnectionResourceLeakExampleTest - 删除临时文件: /private/var/folders/l9/dwlgkqdj119dkrsm7yqfqvlc0000gn/T/hutool2971625087013833248.tmp
 ```
 
 - 日志说明

@@ -1,9 +1,7 @@
 package com.github.lewisbyte;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
@@ -26,7 +24,8 @@ public class ConnectionResourceLeakExample {
      *
      * @param filePath 文件路径
      */
-    public void openFileResource(String filePath) throws FileNotFoundException {
+    @SneakyThrows
+    public void openFileResource(String filePath) {
         BufferedReader ignored = new BufferedReader(new FileReader(filePath));
         // do-nothing
     }
@@ -36,7 +35,8 @@ public class ConnectionResourceLeakExample {
      *
      * @param filePath 文件路径
      */
-    public void openFileAndCloseResource(String filePath) throws IOException {
+    @SneakyThrows
+    public void openFileAndCloseResource(String filePath) {
         try (BufferedReader ignored = new BufferedReader(new FileReader(filePath))) {
             // do-nothing
         }
